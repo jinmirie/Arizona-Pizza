@@ -213,8 +213,7 @@
             gap: 1rem;
         }
 
-        .lang-toggle,
-        .currency-toggle {
+        .lang-toggle {
             background-color: var(--beige);
             border: 2px solid var(--gray);
             border-radius: 50px;
@@ -227,8 +226,7 @@
             transition: var(--transition);
         }
 
-        .lang-toggle:hover,
-        .currency-toggle:hover {
+        .lang-toggle:hover {
             background-color: var(--yellow);
         }
 
@@ -1102,8 +1100,7 @@
                 gap: 0.5rem;
             }
 
-            .lang-toggle,
-            .currency-toggle {
+            .lang-toggle {
                 padding: 6px 12px;
                 font-size: 0.9rem;
             }
@@ -1303,15 +1300,15 @@
         <div class="basket-footer" style="display: none;" id="basketFooter">
             <div class="basket-subtotal">
                 <span class="lang" data-en="Subtotal" data-ar="المجموع الجزئي">Subtotal</span>
-                <span id="subtotalAmount">0</span>
+                <span id="subtotalAmount">0 L.L.</span>
             </div>
             <div class="basket-delivery">
                 <span class="lang" data-en="Delivery Fee" data-ar="رسوم التوصيل">Delivery Fee</span>
-                <span id="deliveryFeeAmount">0</span>
+                <span id="deliveryFeeAmount">0 L.L.</span>
             </div>
             <div class="basket-total">
                 <span class="lang" data-en="Total" data-ar="المجموع الكلي">Total</span>
-                <span id="totalAmount">0</span>
+                <span id="totalAmount">0 L.L.</span>
             </div>
 
             <button class="btn btn-whatsapp" style="width: 100%; margin-top: 1.5rem;" id="orderWhatsApp">
@@ -1330,11 +1327,11 @@
     <div class="mobile-menu" id="mobileMenu">
         <div class="mobile-menu-header">
             <div class="logo">
-                
+             
                 <div class="logo-img">
-                    <img src="img/logo.jpeg" alt="Arizona Pizza Logo">
+                    <img src="img/logo copy_imgupscaler.ai_General_8K.jpg.jpeg"Arizona Pizza Logo">
                 </div>
-                
+             
                 <div class="logo-text">
                     <h1>Arizona Pizza</h1>
                     <p class="lang" data-en="Excellent Pan Pizza" data-ar="بيتزا ممتازة في المقلاة">Excellent Pan Pizza
@@ -1362,9 +1359,9 @@
     <header>
         <div class="container header-container">
             <div class="logo">
-                
+              
                 <div class="logo-img">
-                    <img src="img/logo.jpeg" alt="Arizona Pizza Logo">
+                    <img src="img/logo copy_imgupscaler.ai_General_8K.jpg.jpeg" alt="Arizona Pizza Logo">
                 </div>
                 
                 <div class="logo-text">
@@ -1375,10 +1372,6 @@
             </div>
 
             <div class="header-right">
-                <button class="currency-toggle" id="currencyToggle">
-                    <i class="fas fa-dollar-sign"></i>
-                    <span id="currencyText">USD</span>
-                </button>
                 <button class="lang-toggle" id="langToggle">
                     <i class="fas fa-language"></i>
                     <span class="lang" data-en="العربية" data-ar="English">العربية</span>
@@ -1504,7 +1497,7 @@
                     </select>
                     <div class="delivery-fee-display">
                         <span class="lang" data-en="Delivery Fee:" data-ar="رسوم التوصيل:">Delivery Fee:</span>
-                        <span id="deliveryFee">0</span>
+                        <span id="deliveryFee">0 L.L.</span>
                     </div>
                 </div>
 
@@ -1572,7 +1565,7 @@
                             <div>
                                 <h4 class="lang" data-en="Working Hours" data-ar="ساعات العمل">Working Hours</h4>
                                 <p class="lang" data-en="24/7, all week long" data-ar="24/7 طوال أيام الأسبوع
-                                تحتاج البيتزا ما بين 25 ل 40 دقيقة">24/7, all
+                                تحتاج البيتزا ما بين 25 ل 40 دقيقة,">24/7, all
                                     week long, Pizza take 25 to 40 minutes</p>
                             </div>
                         </div>
@@ -1689,24 +1682,10 @@
         let currentLang = localStorage.getItem('language') || 'en';
         const langToggle = document.getElementById('langToggle');
 
-        // Currency Toggle
-        let currentCurrency = localStorage.getItem('currency') || 'USD';
-        const currencyToggle = document.getElementById('currencyToggle');
-        const currencyText = document.getElementById('currencyText');
-
-        // Exchange rate (90,000 L.L. = 1 USD)
-        const exchangeRate = 90000;
-
         function initializeLanguage() {
             // Set initial language
             document.body.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
             updateLanguage();
-        }
-
-        function initializeCurrency() {
-            // Set initial currency
-            updateCurrencyText();
-            updateAllPrices();
         }
 
         langToggle.addEventListener('click', () => {
@@ -1718,19 +1697,6 @@
             updateDrinksDisplay();
             updateMenuDisplay();
         });
-
-        currencyToggle.addEventListener('click', () => {
-            currentCurrency = currentCurrency === 'USD' ? 'LBP' : 'USD';
-            localStorage.setItem('currency', currentCurrency);
-            updateCurrencyText();
-            updateAllPrices();
-        });
-
-        function updateCurrencyText() {
-            currencyText.textContent = currentCurrency;
-            const icon = currencyToggle.querySelector('i');
-            icon.className = currentCurrency === 'USD' ? 'fas fa-dollar-sign' : 'fas fa-lira-sign';
-        }
 
         function updateLanguage() {
             // Update all elements with lang data attributes
@@ -1920,11 +1886,11 @@
                 ingredientsAr: "حبش، هالبينو، طماطم، وجبن شيدر",
                 category: "meat",
                 sizes: [
-                    { nameEn: "Medium", nameAr: "وسط", price: 400000 },
-                    { nameEn: "Large", nameAr: "كبير", price: 550000 },
-                    { nameEn: "X Large", nameAr: "اكسترا كبير", price: 700000 },
-                    { nameEn: "XX Large", nameAr: "دبل اكسترا", price: 1000000 },
-                    { nameEn: "XXX Large", nameAr: "تربل اكسترا", price: 1100000 }
+                    { nameEn: "Medium", nameAr: "وسط", price: 350000 },
+                    { nameEn: "Large", nameAr: "كبير", price: 500000 },
+                    { nameEn: "X Large", nameAr: "اكسترا كبير", price: 600000 },
+                    { nameEn: "XX Large", nameAr: "دبل اكسترا", price: 900000 },
+                    { nameEn: "XXX Large", nameAr: "تربل اكسترا", price: 1000000 }
                 ]
             },
             {
@@ -1947,7 +1913,7 @@
             {
                 id: 14,
                 nameEn: "Mighty Meat",
-                nameAr: "لحم قوي",
+                nameAr: "Mighty Meat",
                 descEn: "A meat lover's dream",
                 descAr: "حلم محبي اللحوم",
                 ingredientsEn: "Cheese, pepperoni, sausage, beef, turkey",
@@ -2141,59 +2107,26 @@
         const totalAmount = document.getElementById('totalAmount');
         const basketFooter = document.getElementById('basketFooter');
 
-        // Format price based on currency
+        // Format price (only L.L.)
         function formatPrice(priceInLBP) {
-            if (currentCurrency === 'USD') {
-                const priceInUSD = priceInLBP / exchangeRate;
-                return `$${priceInUSD.toFixed(2)}`;
-            } else {
-                return `${priceInLBP.toLocaleString()} L.L.`;
-            }
+            return `${priceInLBP.toLocaleString()} L.L.`;
         }
 
-        // Format price for display (both currencies)
+        // Format price for display (only L.L.)
         function formatPriceDisplay(priceInLBP) {
-            if (currentCurrency === 'USD') {
-                const priceInUSD = priceInLBP / exchangeRate;
-                const priceLBP = priceInLBP.toLocaleString();
-                return `$${priceInUSD.toFixed(2)} <span class="price-lbp">(${priceLBP} L.L.)</span>`;
-            } else {
-                const priceLBP = priceInLBP.toLocaleString();
-                const priceInUSD = priceInLBP / exchangeRate;
-                return `${priceLBP} L.L. <span class="price-lbp">($${priceInUSD.toFixed(2)})</span>`;
-            }
+            return `${priceInLBP.toLocaleString()} L.L.`;
         }
 
         // Delivery Fee Calculator
         locationSelect.addEventListener('change', function () {
             const selectedLocation = this.value;
             if (selectedLocation && deliveryFees[selectedLocation]) {
-                deliveryFeeDisplay.innerHTML = formatPriceDisplay(deliveryFees[selectedLocation]);
+                deliveryFeeDisplay.textContent = formatPriceDisplay(deliveryFees[selectedLocation]);
             } else {
-                deliveryFeeDisplay.innerHTML = formatPriceDisplay(0);
+                deliveryFeeDisplay.textContent = formatPriceDisplay(0);
             }
             updateBasketTotals();
         });
-
-        // Update all prices on the page
-        function updateAllPrices() {
-            // Update menu prices
-            updateMenuDisplay();
-
-            // Update drink prices
-            updateDrinksDisplay();
-
-            // Update basket totals
-            updateBasketTotals();
-
-            // Update delivery fee display
-            const selectedLocation = locationSelect.value;
-            if (selectedLocation && deliveryFees[selectedLocation]) {
-                deliveryFeeDisplay.innerHTML = formatPriceDisplay(deliveryFees[selectedLocation]);
-            } else {
-                deliveryFeeDisplay.innerHTML = formatPriceDisplay(0);
-            }
-        }
 
         // Update basket count
         function updateBasketCount() {
@@ -2208,9 +2141,9 @@
             const deliveryFee = selectedLocation && deliveryFees[selectedLocation] ? deliveryFees[selectedLocation] : 0;
             const total = subtotal + deliveryFee;
 
-            subtotalAmount.innerHTML = formatPriceDisplay(subtotal);
-            deliveryFeeAmount.innerHTML = formatPriceDisplay(deliveryFee);
-            totalAmount.innerHTML = formatPriceDisplay(total);
+            subtotalAmount.textContent = formatPriceDisplay(subtotal);
+            deliveryFeeAmount.textContent = formatPriceDisplay(deliveryFee);
+            totalAmount.textContent = formatPriceDisplay(total);
         }
 
         // Update basket display
@@ -2282,7 +2215,6 @@
                         <div class="drink-size lang" data-en="${drink.sizeEn}" data-ar="${drink.sizeAr}">${drink.sizeEn}</div>
                         <div class="drink-price">
                             <span>${formatPrice(drink.price)}</span>
-                            <span class="drink-price-lbp">${currentCurrency === 'USD' ? `(${(drink.price / exchangeRate).toFixed(2)} USD)` : `(${(drink.price / exchangeRate).toFixed(2)} USD)`}</span>
                         </div>
                         <button class="btn btn-add drink-add-btn" data-id="${drink.id}" style="margin-top: 10px; padding: 8px 16px; font-size: 0.9rem;">
                             <span class="lang" data-en="Add to Order" data-ar="أضف إلى الطلب">Add to Order</span>
@@ -2539,7 +2471,7 @@
                     if (doubleCheese) {
                         price = price * 2;
                     }
-                    priceElement.innerHTML = formatPriceDisplay(price);
+                    priceElement.textContent = formatPriceDisplay(price);
                 }
             });
         }
@@ -2638,97 +2570,60 @@
 
         // Initialize everything
         initializeLanguage();
-        initializeCurrency();
         updateMenuDisplay();
         updateDrinksDisplay();
         updateBasketCount();
         updateBasketDisplay();
 
         // Set initial delivery fee display
-        deliveryFeeDisplay.innerHTML = formatPriceDisplay(0);
+        deliveryFeeDisplay.textContent = formatPriceDisplay(0);
+
         function showAddToCartNotification(nameEn, nameAr) {
-    const name = currentLang === 'en' ? nameEn : nameAr;
-    const notification = document.createElement('div');
-    
-    // Set animation based on direction
-    const isRTL = document.body.dir === 'rtl';
-    const slideInAnim = isRTL ? 'slideInRTL' : 'slideIn';
-    const slideOutAnim = isRTL ? 'slideOutRTL' : 'slideOut';
-    
-    notification.style.cssText = `
-        position: fixed;
-        top: 100px;
-        ${isRTL ? 'left: 20px;' : 'right: 20px;'}
-        background-color: var(--red);
-        color: white;
-        padding: 15px 25px;
-        border-radius: var(--radius);
-        box-shadow: var(--shadow);
-        z-index: 1002;
-        animation: ${slideInAnim} 0.3s ease;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-    `;
-    
-    notification.innerHTML = `
-        <i class="fas fa-check-circle"></i>
-        <span>${name} ${currentLang === 'en' ? 'added to cart!' : 'تمت الإضافة إلى السلة!'}</span>
-    `;
-    
-    document.body.appendChild(notification);
-    
-    setTimeout(() => {
-        notification.style.animation = `${slideOutAnim} 0.3s ease`;
-        setTimeout(() => notification.remove(), 300);
-    }, 2000);
-}
-function showAddToCartNotification(nameEn, nameAr) {
-    const name = currentLang === 'en' ? nameEn : nameAr;
-    const notification = document.createElement('div');
-    
-    // Check if RTL
-    const isRTL = document.body.dir === 'rtl';
-    
-    notification.style.cssText = `
-        position: fixed;
-        top: 100px;
-        ${isRTL ? 'left: 20px;' : 'right: 20px;'}
-        background-color: var(--red);
-        color: white;
-        padding: 15px 25px;
-        border-radius: var(--radius);
-        box-shadow: var(--shadow);
-        z-index: 1002;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-    `;
-    
-    notification.innerHTML = `
-        <i class="fas fa-check-circle"></i>
-        <span>${name} ${currentLang === 'en' ? 'added to cart!' : 'تمت الإضافة إلى السلة!'}</span>
-    `;
-    
-    document.body.appendChild(notification);
-    
-    // Slide in animation
-    notification.style.transform = isRTL ? 'translateX(-100%)' : 'translateX(100%)';
-    notification.style.opacity = '0';
-    
-    setTimeout(() => {
-        notification.style.transition = 'transform 0.3s ease, opacity 0.3s ease';
-        notification.style.transform = 'translateX(0)';
-        notification.style.opacity = '1';
-    }, 10);
-    
-    setTimeout(() => {
-        notification.style.transform = isRTL ? 'translateX(-100%)' : 'translateX(100%)';
-        notification.style.opacity = '0';
-        
-        setTimeout(() => notification.remove(), 300);
-    }, 2000);
-}
+            const name = currentLang === 'en' ? nameEn : nameAr;
+            const notification = document.createElement('div');
+            
+            // Check if RTL
+            const isRTL = document.body.dir === 'rtl';
+            
+            notification.style.cssText = `
+                position: fixed;
+                top: 100px;
+                ${isRTL ? 'left: 20px;' : 'right: 20px;'}
+                background-color: var(--red);
+                color: white;
+                padding: 15px 25px;
+                border-radius: var(--radius);
+                box-shadow: var(--shadow);
+                z-index: 1002;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+            `;
+            
+            notification.innerHTML = `
+                <i class="fas fa-check-circle"></i>
+                <span>${name} ${currentLang === 'en' ? 'added to cart!' : 'تمت الإضافة إلى السلة!'}</span>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            // Slide in animation
+            notification.style.transform = isRTL ? 'translateX(-100%)' : 'translateX(100%)';
+            notification.style.opacity = '0';
+            
+            setTimeout(() => {
+                notification.style.transition = 'transform 0.3s ease, opacity 0.3s ease';
+                notification.style.transform = 'translateX(0)';
+                notification.style.opacity = '1';
+            }, 10);
+            
+            setTimeout(() => {
+                notification.style.transform = isRTL ? 'translateX(-100%)' : 'translateX(100%)';
+                notification.style.opacity = '0';
+                
+                setTimeout(() => notification.remove(), 300);
+            }, 2000);
+        }
     </script>
 </body>
 
